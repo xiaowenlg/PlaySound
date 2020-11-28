@@ -13,17 +13,7 @@ WTN6040语音芯片
 #define  SYSCLOSE_PIN		GPIO_PIN_8 //关闭系统引脚，高电平关闭
 #define  SYSCLOSE_PORT		GPIOB
 #define  SYSIO				PBout(8)   //位带操作
-/************************************************************************/
-/* 74HC595                                                              */
-/************************************************************************/
-#define  DS    PAout(5)
-#define  RCK   PAout(6)
-#define  SCK   PAout(7)
 
-#define  HC595_PORT		GPIOA
-#define  HC595_PIN      GPIO_PIN_5 | GPIO_PIN_5 | GPIO_PIN_7
-void HC595_Init();
-void SendData_595(uint16_t outdate);
 
 /*TFT操作函数*/
 #define array_length          100  //定义数组长度

@@ -3,6 +3,9 @@
  * TFT屏和74HC595驱动
  * date 九月 2019
  */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
 #include "application.h"
 #include "system.h"
 #include "usart.h"
@@ -11,62 +14,7 @@
 #include "math.h"
 #include "string.h"
 #include "BspConfig.h"
-//#include "cmsis_os.h"
-//************************************
-// 函数:    HC595_Init
-// 函数全名:  HC595_Init
-// 函数类型:    public 
-// 返回值:   void
-// Qualifier:595初始化
-//************************************
-void HC595_Init()
-{
-	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
-	__HAL_RCC_GPIOA_CLK_ENABLE();
 
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(HC595_PORT, HC595_PIN, GPIO_PIN_RESET);
-
-	GPIO_InitStruct.Pin = HC595_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	HAL_GPIO_Init(HC595_PORT, &GPIO_InitStruct);
-}
-//************************************
-// 函数:    SendData_595
-// 函数全名:  SendData_595
-// 函数类型:    public 
-// 返回值:   void
-// Qualifier:发送数据
-// 参数: uint16_t outdate
-//************************************
-void SendData_595(uint16_t outdate)
-{
-	uint8_t i = 0;
-	for (i = 0; i < 16; i++)
-	{
-		
-		if ((outdate & 0x8000) != 0)
-			DS = 1;
-		else
-			DS = 0;
-		SCK = 0;
-		__NOP();
-		__NOP();
-		__NOP();
-		SCK = 1;
-		__NOP();
-		__NOP();
-		__NOP();
-		outdate <<= 1;
-
-	}
-	RCK = 0;
-	osDelay(1);
-	RCK = 1;
-
-}
 /*TFT操作*/
 //************************************
 // 函数:    write_register_80_1byte

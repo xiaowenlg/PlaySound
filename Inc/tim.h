@@ -44,7 +44,7 @@ void SendCom(uint8_t com);
 extern QueueHandle_t xQueuel_sportmes;
 extern uint8_t pstate;
 extern uint8_t iscolsesystem;
-extern uint8_t uart_flag;
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

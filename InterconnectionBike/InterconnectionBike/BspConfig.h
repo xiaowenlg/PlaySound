@@ -6,7 +6,6 @@
 //外设接口引脚定义
 #define REED_Pin GPIO_PIN_0   //干簧管引脚
 #define REED_GPIO_Port GPIOA
-#define REED_EXTI_IRQn EXTI0_IRQn
 
 //------------------------------------------ 语音芯片WTN6040
 #define WTN_BUSY_Pin			GPIO_PIN_15//忙引脚
@@ -95,7 +94,7 @@ typedef struct SportInfo      //运动信息
 
 //不同器材不同参数
 #define CAL_K							5				//cal系数
-#define EMID         "00010000400023000002"
+#define EMID         "00010000600004000001"
 //
 
 #endif // !__BSPCONFIG_H

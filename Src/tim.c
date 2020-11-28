@@ -155,35 +155,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				}
 				//Uartx_printf(&huart1, "Tim_playstate=%d\r\n",ptMsg->playstate);
 			}
-			if (PERIOD_DO_EXECUTE(tick, SENDDATA)==0) //发送一次播放消息
+			if (PERIOD_DO_EXECUTE(tick, SENDDATA)==0) //定时更新运动数据
 			{
-				//发送数据到if (xQueuel_tim!=NULL)
-			
-				 //   if (ptMsg->playstate != xQueueFlag_last)
-					//{
-					//	if (xQueueFlag==1)
-					//	{
-					//		xQueueSendFromISR(xQueuel_sportmes, (void *)&ptMsg, &xHigherPriorityTaskWoken);//发送消息
-					//		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-					//		
-					//	}
-					//}
-					//
-					//xQueueFlag_last = ptMsg->playstate;
-				//Uartx_printf(&huart1, "Tim_playstate=%d\r\n", ptMsg->playstate);
-				
 				xQueueSendFromISR(xQueuel_sportmes, (void *)&ptMsg, &xHigherPriorityTaskWoken);//发送消息
 				portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 
-					
 			}
 			tick++;
 		}
-		if (timer2_Test++ > 100)
-		{
-			timer2_Test = 0;
-			uart_flag = 1;
-		}
+		
 	}
 }
 
@@ -194,12 +174,6 @@ void SensorCallBack(uint8_t v)//计次回调函数
 	TempCount++;
 	SportCount++;
 	ptMsg->count = SportCount;
-	//在此处向串口屏发送数据
-	//Uart_printf(&huart1, "Freq=%d      SportCount=%d", ptMsg->freq, SportCount);
-	//Uart_printf(&huart1,"hot=%d",ConsumeHeat(WEIGHT, 1 / 60.00, 50.00))
-	//SendCom(REQUEST_DATA);
-    //xQueueSend(xQueuel_sportmes, (void *)&ptMsg, 10);
-	//xQueueFlag = 1;
 	iscolsesystem = 0;
 	SYSIO = 0;
 	//TFT_Beep(2);// bi-bi 声音

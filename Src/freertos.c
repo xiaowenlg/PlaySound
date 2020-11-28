@@ -32,6 +32,7 @@
 #include "BspConfig.h"
 #include "application.h"
 #include "adc.h"
+#include "gpio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,7 +42,7 @@ uint8_t pstate = 0;
 uint8_t iscolsesystem = 0;//
 //线程同步
 extern SemaphoreHandle_t xSemaphore_WTN6_TFT; //串口，语音播放互斥量
-uint8_t uart_flag = 0;
+
 
 
 /* USER CODE END PTD */
@@ -70,7 +71,7 @@ osThreadId DataInteractionHandle;
 void PlayCallback(uint8_t val);//语音播放回调函数
 Customerinfo SportInfo_Get = { 0 };   //获取到的运动信息
 void SendMessageToTFT(uint16_t address);
-void SendToBle(huart);					//上传运动信息
+void SendToBle(UART_HandleTypeDef *huart);					//上传运动信息
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
