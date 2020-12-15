@@ -144,14 +144,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 					{
 						ptMsg->playstate = 0;   //停止播放
 					}
-					if (pstate)//播放完毕清除播放标志
-					{
-						pstate = 0;
-						SportCount = 0;
-						ptMsg->tim = 0;
-						ptMsg->hot = 0;
-					}
+					
 					//Uartx_printf(&huart1, "waiTim=%d", waitTim);       //检测用
+				}
+				if (pstate)//播放完毕清除播放标志
+				{
+					pstate = 0;
+					SportCount = 0;
+					ptMsg->tim = 0;
+					ptMsg->hot = 0;
 				}
 				//Uartx_printf(&huart1, "Tim_playstate=%d\r\n",ptMsg->playstate);
 			}
