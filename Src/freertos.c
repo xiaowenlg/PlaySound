@@ -120,7 +120,7 @@ void StartDefaultTask(void const * argument)
 	Uart_TFTHandle = osThreadCreate(osThread(Uart_TFT), NULL);
 
 	/* definition and creation of DataInteraction */
-	osThreadDef(DataInteraction, DataInteraction_CallBack,3, 0, 128);
+	osThreadDef(DataInteraction, DataInteraction_CallBack,6, 0, 128);
 	DataInteractionHandle = osThreadCreate(osThread(DataInteraction), NULL);
 	
   /* Infinite loop */
@@ -271,7 +271,7 @@ void PlayCallback(uint8_t val)//语音播放回调函数
 	
 	playdatalen = GetPlayData(SportInfo_Get.count, SportInfo_Get.tim, (double)SportInfo_Get.hot, playarray);
 	pstate = WTN6040_PlayArray(playdatalen, playarray,1000);
-	iscolsesystem = pstate;
+	iscolsesystem = 1;//表示播报完毕
 	//Uart_printf(&huart2, "pstate is %d\r\n",pstate);
 }
 void  QF_CRC(uint8_t *dat, uint8_t len)

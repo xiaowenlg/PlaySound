@@ -150,7 +150,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				if (pstate)//播放完毕清除播放标志
 				{
 					pstate = 0;
-					SportCount = 0;
+					//SportCount = 0; ***********此处bug
 					ptMsg->tim = 0;
 					ptMsg->hot = 0;
 				}

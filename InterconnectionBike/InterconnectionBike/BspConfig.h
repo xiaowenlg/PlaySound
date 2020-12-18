@@ -93,8 +93,8 @@ typedef struct SportInfo      //运动信息
 
 
 //不同器材不同参数
-#define CAL_K							7				//cal系数
-#define EMID         "00010000300007000090"
+#define CAL_K							5				//cal系数
+#define EMID         "00010000300014000072"
 //
 
 #endif // !__BSPCONFIG_H
