@@ -91,7 +91,12 @@ typedef struct SportInfo      //运动信息
 //错误信息列表
 #define ERROR_XQUEUE_CREAT				0x01			//消息队列创建错误
 
-
+//计算外部电源电压，用来设置低电压关机
+#define R_UP							39.00				//上偏置电阻	K
+#define R_DOWN							15.00				//下偏置电阻	K
+#define CAL_K_RES(voltage)				((R_UP+R_DOWN)/R_DOWN)*voltage         //计算电池电压值
+#define VOLTAGE_T						2000				//电压检测周期单位ms
+#define POWER_VOLTAGE_LOW				9800				//系统要求最低电压单位mV
 //不同器材不同参数
 #define CAL_K							5				//cal系数
 #define EMID         "00010000300014000072"

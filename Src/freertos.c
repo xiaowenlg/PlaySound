@@ -72,6 +72,7 @@ void PlayCallback(uint8_t val);//语音播放回调函数
 Customerinfo SportInfo_Get = { 0 };   //获取到的运动信息
 void SendMessageToTFT(uint16_t address);
 void SendToBle(UART_HandleTypeDef *huart);					//上传运动信息
+uint16_t Cal_In_Voltage(uint16_t v);//计算外部电源电压
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -190,7 +191,8 @@ void DataInteraction_CallBack(void const * argument)//
 {
   /* USER CODE BEGIN Uart_TFT_CallBack */
   /* Infinite loop */
-	static uint16_t tick = 0,loop = 0;
+	static uint16_t tick = 0,loop = 0,voltage_tim = 0;
+	uint8_t LowVoltage_num = 0;
   for(;;)
   {
 	  //Uart_printf(UART_CONNECTION, "System closed!\r\n");
@@ -219,6 +221,24 @@ void DataInteraction_CallBack(void const * argument)//
 	  }
 	  else
 		  loop = 0;
+	  if (voltage_tim++ > VOLTAGE_T / 50)
+	  {
+		  voltage_tim = 0;
+		  uint16_t vt = ADC_Conversion(&hadc1, 10);
+		  vt = Cal_In_Voltage(vt);
+
+		  if (vt < POWER_VOLTAGE_LOW)
+		  {
+			  Turen_Pic(2);
+			  if (LowVoltage_num++>5)
+			  {
+				  LowVoltage_num = 0;
+				  SYSIO = 1;                     //电压低关闭系统
+			  }
+		  }
+
+
+	  }
 	  //Uart_printf(&huart1, "Uart2\r\n");
     osDelay(50);
   }
@@ -273,6 +293,11 @@ void PlayCallback(uint8_t val)//语音播放回调函数
 	pstate = WTN6040_PlayArray(playdatalen, playarray,1000);
 	iscolsesystem = 1;//表示播报完毕
 	//Uart_printf(&huart2, "pstate is %d\r\n",pstate);
+}
+uint16_t Cal_In_Voltage(uint16_t v)
+{
+	float k = (R_DOWN + R_UP) / R_DOWN;
+	return	(uint16_t)(k*((v * 825) >> 10));
 }
 void  QF_CRC(uint8_t *dat, uint8_t len)
 {

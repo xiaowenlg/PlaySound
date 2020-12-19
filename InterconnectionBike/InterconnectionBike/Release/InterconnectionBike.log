@@ -1,4 +1,4 @@
-﻿生成启动时间为 2020/12/18 11:49:06。
+﻿生成启动时间为 2020/12/19 13:47:50。
      1>项目“E:\QFProject\PlaySound\InterconnectionBike\InterconnectionBike\InterconnectionBike.vcxproj”在节点 2 上(Clean 个目标)。
      1>CoreClean:
          "C:\Program Files (x86)\Sysprogs\VisualGDB\\VisualGDB.exe" /clean "E:\QFProject\PlaySound\InterconnectionBike\InterconnectionBike\InterconnectionBike.vcxproj" "/solution:E:\QFProject\PlaySound\InterconnectionBike\PlaySound.sln"  "/config:Release" "/platform:Win32"
@@ -88,4 +88,4 @@
 
 生成成功。
 
-已用时间 00:00:01.64
+已用时间 00:00:01.57
