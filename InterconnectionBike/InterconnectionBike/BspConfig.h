@@ -98,7 +98,7 @@ typedef struct SportInfo      //运动信息
 #define VOLTAGE_T						2000				//电压检测周期单位ms
 #define POWER_VOLTAGE_LOW				9800				//系统要求最低电压单位mV
 //不同器材不同参数
-#define CAL_K							5				//cal系数
+#define CAL_K							2				//cal系数
 #define EMID         "00010000300014000072"
 //
 
